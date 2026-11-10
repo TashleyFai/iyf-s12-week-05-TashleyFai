@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2 - Dynamic Element Creator</title>
+</head>
+<body>
+    <h1>Day 2: Dynamic Element Creator</h1>
+
+    <button id="add-paragraph">Add Paragraph</button>
+
+    <div id="paragraph-container"></div>
+
+    <script>
+        const button = document.getElementById("add-paragraph");
+        const container = document.getElementById("paragraph-container");
+
+        let count = 0;
+
+        button.addEventListener("click", function() {
+            count++;
+
+            const paragraph = document.createElement("p");
+            paragraph.textContent = "This is paragraph number " + count;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+
+            deleteButton.addEventListener("click", function() {
+                paragraph.remove();
+            });
+
+            paragraph.appendChild(deleteButton);
+            container.appendChild(paragraph);
+        });
+    </script>
+</body>
+</html>
