@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 5 Daily DOM Challenges</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 9px 14px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #1f6feb;
+            color: white;
+        }
+
+        img {
+            width: 150px;
+            margin: 8px;
+        }
+
+        #source, #target {
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #999;
+        }
+
+        .dark-mode {
+            background: #222;
+            color: white;
+        }
+
+        .dark-mode section {
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Week 5: Daily DOM Challenges</h1>
+
+    <section>
+        <h2>1. Color Changer</h2>
+        <h3 id="color-heading">Change My Color</h3>
+        <button id="color-button">Change Color</button>
+    </section>
+
+    <section>
+        <h2>2. Dynamic Element Creator</h2>
+        <button id="add-button">Add Paragraph</button>
+        <div id="paragraph-container"></div>
+    </section>
+
+    <section>
+        <h2>3. Image Remover</h2>
+        <img src="https://picsum.photos/200/120?random=1" alt="Sample image one">
+        <img src="https://picsum.photos/200/120?random=2" alt="Sample image two">
+        <br>
+        <button id="remove-images">Remove Images</button>
+        <button id="show-images">Show Images</button>
+    </section>
+
+    <section>
+        <h2>4. Content Copier</h2>
+        <div id="source">This is the content to copy.</div>
+        <div id="target">Copied content will appear here.</div>
+        <button id="copy-button">Copy Content</button>
+    </section>
+
+    <section>
+        <h2>5. Dark Mode Toggle</h2>
+        <p>Click the button to switch between light and dark mode.</p>
+        <button id="dark-button">Toggle Dark Mode</button>
+    </section>
+
+    <script>
+        // Challenge 1: Color Changer
+        const colorHeading = document.getElementById("color-heading");
+        const colorButton = document.getElementById("color-button");
+
+        colorButton.addEventListener("click", function() {
+            const randomColor = "#" + Math.floor(Math.random() * 16777215)
+                .toString(16).padStart(6, "0");
+            colorHeading.style.color = randomColor;
+        });
+
+        // Challenge 2: Dynamic Element Creator
+        const addButton = document.getElementById("add-button");
+        const paragraphContainer = document.getElementById("paragraph-container");
+        let paragraphCount = 0;
+
+        addButton.addEventListener("click", function() {
+            paragraphCount++;
+
+            const paragraph = document.createElement("p");
+            paragraph.textContent = "This is paragraph number " + paragraphCount;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+
+            deleteButton.addEventListener("click", function() {
+                paragraph.remove();
+            });
+
+            paragraph.appendChild(deleteButton);
+            paragraphContainer.appendChild(paragraph);
+        });
+
+        // Challenge 3: Image Remover
+        const images = document.querySelectorAll("section img");
+        const removeImagesButton = document.getElementById("remove-images");
+        const showImagesButton = document.getElementById("show-images");
+
+        removeImagesButton.addEventListener("click", function() {
+            images.forEach(function(image) {
+                image.remove();
+            });
+        });
+
+        showImagesButton.addEventListener("click", function() {
+            const imageSection = images[0].parentElement;
+            images.forEach(function(image) {
+                imageSection.insertBefore(image, removeImagesButton.parentElement);
+            });
+        });
+
+        // Challenge 4: Content Copier
+        const source = document.getElementById("source");
+        const target = document.getElementById("target");
+        const copyButton = document.getElementById("copy-button");
+
+        copyButton.addEventListener("click", function() {
+            target.textContent = source.textContent;
+        });
+
+        // Challenge 5: Dark Mode Toggle
+        const darkButton = document.getElementById("dark-button");
+
+        darkButton.addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+        });
+    </script>
+
+</body>
+</html>
