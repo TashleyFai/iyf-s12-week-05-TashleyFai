@@ -153,15 +153,23 @@ todoList.addEventListener("dblclick", function(event) {
     const input = document.createElement("input");
     input.type = "text";
     input.classList.add("edit-input");
-    input.value = todos.find(function(todo) {
-        return todo.id === todoId;
-    }).text;
+
+    const todo = todos.find(function(item) {
+        return item.id === todoId;
+    });
+
+    input.value = todo.text;
 
     span.replaceWith(input);
     input.focus();
     input.select();
 
+    let editFinished = false;
+
     function saveEdit() {
+        if (editFinished) return;
+        editFinished = true;
+
         const newText = input.value.trim();
 
         if (newText !== "") {
@@ -176,6 +184,9 @@ todoList.addEventListener("dblclick", function(event) {
     }
 
     function cancelEdit() {
+        if (editFinished) return;
+        editFinished = true;
+
         renderTodos();
     }
 
