@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1 - Color Changer</title>
+</head>
+<body>
+    <h1>Day 1: Color Changer</h1>
+    <h2>Welcome to JavaScript DOM!</h2>
+    <h3>Click the button to change my color</h3>
+
+    <button id="change-color">Change Colors</button>
+
+    <script>
+        const button = document.getElementById("change-color");
+
+        button.addEventListener("click", function() {
+            const headings = document.querySelectorAll("h1, h2, h3");
+
+            const randomColor = "#" + Math.floor(Math.random() * 16777215)
+                .toString(16).padStart(6, "0");
+
+            headings.forEach(function(heading) {
+                heading.style.color = randomColor;
+            });
+        });
+    </script>
+</body>
+</html>
