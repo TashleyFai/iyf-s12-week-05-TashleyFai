@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3 - Image Remover</title>
+</head>
+<body>
+    <h1>Day 3: Image Remover</h1>
+
+    <div id="image-container">
+        <img src="https://placehold.co/200x120?text=Image+1" alt="Sample image 1">
+        <img src="https://placehold.co/200x120?text=Image+2" alt="Sample image 2">
+        <img src="https://placehold.co/200x120?text=Image+3" alt="Sample image 3">
+    </div>
+
+    <button id="remove-images">Remove All Images</button>
+    <button id="show-images">Show Images</button>
+
+    <script>
+        const container = document.getElementById("image-container");
+        const removeButton = document.getElementById("remove-images");
+        const showButton = document.getElementById("show-images");
+
+        const originalImages = Array.from(container.querySelectorAll("img"))
+            .map(function(image) {
+                return image.cloneNode(true);
+            });
+
+        removeButton.addEventListener("click", function() {
+            const images = container.querySelectorAll("img");
+
+            images.forEach(function(image) {
+                image.remove();
+            });
+        });
+
+        showButton.addEventListener("click", function() {
+            if (container.querySelectorAll("img").length === 0) {
+                originalImages.forEach(function(image) {
+                    container.appendChild(image.cloneNode(true));
+                });
+            }
+        });
+    </script>
+</body>
+</html>
